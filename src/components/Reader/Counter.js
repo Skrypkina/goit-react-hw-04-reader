@@ -1,18 +1,16 @@
-import React, { Fragment } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import styles from './Reader.module.css';
 
-const Counter = ({ idx, number }) => (
-  <Fragment>
-    <p className={styles.counter}>
-      {idx}/{number}
-    </p>
-  </Fragment>
+const Counter = ({ current, total }) => (
+  <p className={styles.counter}>
+    {current}/{total}
+  </p>
 );
 
 Counter.propTypes = {
-  idx: PropTypes.number,
-  number: PropTypes.number,
+  current: PropTypes.number,
+  total: PropTypes.number,
 };
 
 export default Counter;

@@ -9,12 +9,10 @@ const Publication = ({ item }) => (
 );
 
 Publication.propTypes = {
-  item: PropTypes.objectOf(
-    PropTypes.shape({
-      title: PropTypes.string,
-      text: PropTypes.string,
-    }),
-  ).isRequired,
+  item: PropTypes.shape({
+    title: PropTypes.string.isRequired,
+    text: PropTypes.string.isRequired,
+  }).isRequired,
 };
 
 export default Publication;

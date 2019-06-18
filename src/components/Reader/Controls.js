@@ -2,11 +2,11 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import styles from './Reader.module.css';
 
-const Controls = ({ handleDecrement, handleIncrement, idx }) => (
+const Controls = ({ handleDecrement, handleIncrement, currentPageNumber }) => (
   <section className={styles.controls}>
     <button
       type="button"
-      className={idx > 1 ? styles.button : styles.disabled}
+      className={currentPageNumber > 1 ? styles.button : styles.disabled}
       onClick={handleDecrement}
     >
       Назад
@@ -14,7 +14,7 @@ const Controls = ({ handleDecrement, handleIncrement, idx }) => (
 
     <button
       type="button"
-      className={idx < 12 ? styles.button : styles.disabled}
+      className={currentPageNumber < 12 ? styles.button : styles.disabled}
       onClick={handleIncrement}
     >
       Вперед
@@ -26,7 +26,7 @@ Controls.propTypes = {
   handleDecrement: PropTypes.func.isRequired,
   handleIncrement: PropTypes.func.isRequired,
 
-  idx: PropTypes.number.isRequired,
+  currentPageNumber: PropTypes.number.isRequired,
 };
 
 export default Controls;
