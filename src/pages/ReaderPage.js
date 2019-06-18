@@ -13,25 +13,23 @@ const getItemFromLocation = props =>
 export default class ReaderPage extends Component {
   state = {
     article: {},
-    idx: 1,
   };
 
   componentDidMount() {
-    // const location = this.props.location.search;
+    const location = this.props.location.search;
     const qs = getItemFromLocation(this.props);
     const index = Number(qs);
     const item = index - 1;
 
     if (!qs) {
-      return this.props.history.push({
-        pathname: this.props.location.pathname,
+      this.setState({ article: publications[0] });
+      this.props.history.replace({
+        pathname: location,
         search: `item=1`,
       });
     }
-    if (!qs) {
-      return this.setState({ article: publications[0] });
-    }
-    this.setState({ article: publications[item], idx: index });
+
+    this.setState({ article: publications[item] });
   }
 
   handleIncrement = () => {
@@ -39,7 +37,6 @@ export default class ReaderPage extends Component {
     const number = index + 1;
 
     this.setState(state => ({
-      idx: this.state.idx + 1,
       article: publications[index],
     }));
 
@@ -52,11 +49,10 @@ export default class ReaderPage extends Component {
   handleDecrement = () => {
     const index = Number(getItemFromLocation(this.props));
     const number = index - 1;
-    // console.log(index);
+
     const item = number - 1;
 
     this.setState(state => ({
-      idx: this.state.idx - 1,
       article: publications[item],
     }));
     this.props.history.push({
@@ -66,17 +62,17 @@ export default class ReaderPage extends Component {
   };
 
   render() {
-    const { idx, article } = this.state;
+    const { article } = this.state;
+    const page = Number(getItemFromLocation(this.props));
 
     return (
       <div>
         {article && <Publication item={article} />}
-        <Counter number={number} idx={idx} />
-
+        <Counter number={number} idx={page} />
         <Controls
           handleIncrement={this.handleIncrement}
           handleDecrement={this.handleDecrement}
-          idx={idx}
+          idx={page}
         />
       </div>
     );
